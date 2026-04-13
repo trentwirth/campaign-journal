@@ -1,0 +1,232 @@
+/* ── Reset & base ─────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:          #1e1e2e;
+  --bg-surface:  #27273a;
+  --bg-elevated: #313148;
+  --bg-hover:    #3a3a55;
+  --border:      #45455e;
+  --text:        #cdd6f4;
+  --text-muted:  #6c7086;
+  --text-subtle: #9399b2;
+  --accent:      #cba6f7;
+  --accent-dim:  #7c6da0;
+  --accent-glow: rgba(203,166,247,0.18);
+  --green:       #a6e3a1;
+  --red:         #f38ba8;
+  --yellow:      #f9e2af;
+  --blue:        #89b4fa;
+  --teal:        #94e2d5;
+  --sidebar-w:   240px;
+  --tab-h:       44px;
+  --radius:      6px;
+  --font-mono:   'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+  --font-sans:   system-ui, -apple-system, sans-serif;
+}
+
+html, body, #app {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Scrollbar ──────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-subtle); }
+
+/* ── Typography helpers ──────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 { color: var(--text); font-weight: 600; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+code { font-family: var(--font-mono); font-size: 0.88em; }
+pre { font-family: var(--font-mono); }
+
+/* ── Buttons ─────────────────────────────────────────────────── */
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+  font: inherit;
+  border-radius: var(--radius);
+  transition: background 0.15s, color 0.15s;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: var(--bg-elevated);
+  color: var(--text);
+  border-radius: var(--radius);
+  font-size: 13px;
+  font-weight: 500;
+  border: 1px solid var(--border);
+}
+.btn:hover { background: var(--bg-hover); border-color: var(--accent-dim); }
+.btn-primary {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+  color: var(--bg);
+}
+.btn-primary:hover { background: var(--accent); }
+.btn-ghost { background: transparent; border-color: transparent; }
+.btn-ghost:hover { background: var(--bg-elevated); }
+.btn-danger { border-color: var(--red); color: var(--red); }
+.btn-danger:hover { background: rgba(243,139,168,0.15); }
+.btn-sm { padding: 3px 8px; font-size: 12px; }
+.btn-icon { padding: 4px; border-radius: var(--radius); }
+.btn-icon:hover { background: var(--bg-elevated); }
+
+/* ── Inputs ──────────────────────────────────────────────────── */
+input[type="text"], input[type="number"], select, textarea {
+  background: var(--bg-elevated);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 6px 10px;
+  font: inherit;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--accent-dim);
+}
+
+/* ── Tiptap Editor ───────────────────────────────────────────── */
+.tiptap-editor .ProseMirror {
+  outline: none;
+  padding: 0;
+}
+
+.tiptap-editor .ProseMirror > * + * { margin-top: 0.75em; }
+
+.tiptap-editor .ProseMirror h1 { font-size: 2em; font-weight: 700; border-bottom: 1px solid var(--border); padding-bottom: 0.3em; color: var(--text); }
+.tiptap-editor .ProseMirror h2 { font-size: 1.5em; font-weight: 600; color: var(--text); }
+.tiptap-editor .ProseMirror h3 { font-size: 1.25em; font-weight: 600; color: var(--text); }
+.tiptap-editor .ProseMirror h4 { font-size: 1.1em; font-weight: 600; color: var(--text); }
+
+.tiptap-editor .ProseMirror p { color: var(--text); }
+.tiptap-editor .ProseMirror strong { color: var(--text); font-weight: 700; }
+.tiptap-editor .ProseMirror em { color: var(--text-subtle); font-style: italic; }
+.tiptap-editor .ProseMirror s { color: var(--text-muted); }
+
+.tiptap-editor .ProseMirror ul,
+.tiptap-editor .ProseMirror ol {
+  padding-left: 1.5em;
+}
+.tiptap-editor .ProseMirror li > p { margin: 0; }
+
+.tiptap-editor .ProseMirror blockquote {
+  border-left: 3px solid var(--accent-dim);
+  padding-left: 1em;
+  color: var(--text-subtle);
+  margin: 0;
+}
+
+.tiptap-editor .ProseMirror hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 1.5em 0;
+}
+
+.tiptap-editor .ProseMirror code {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1px 5px;
+  color: var(--teal);
+  font-size: 0.87em;
+}
+
+.tiptap-editor .ProseMirror pre {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  overflow-x: auto;
+}
+.tiptap-editor .ProseMirror pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--text);
+  font-size: 0.87em;
+}
+
+.tiptap-editor .ProseMirror a { color: var(--blue); }
+.tiptap-editor .ProseMirror a:hover { color: var(--accent); }
+
+/* Task list */
+.tiptap-editor .ProseMirror ul[data-type="taskList"] { list-style: none; padding-left: 0.5em; }
+.tiptap-editor .ProseMirror ul[data-type="taskList"] li {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+.tiptap-editor .ProseMirror ul[data-type="taskList"] li > label { margin-top: 2px; }
+.tiptap-editor .ProseMirror ul[data-type="taskList"] li input[type="checkbox"] {
+  accent-color: var(--accent);
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
+}
+
+/* Date tags */
+.tiptap-editor .ProseMirror .date-tag,
+.date-tag {
+  display: inline-block;
+  background: var(--accent-glow);
+  color: var(--accent);
+  border: 1px solid var(--accent-dim);
+  border-radius: 4px;
+  padding: 0 5px;
+  font-size: 0.85em;
+  font-family: var(--font-mono);
+  cursor: pointer;
+}
+
+/* Placeholder */
+.tiptap-editor .ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  color: var(--text-muted);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+/* ── Code highlight (lowlight) ───────────────────────────────── */
+.hljs-comment, .hljs-quote { color: var(--text-muted); font-style: italic; }
+.hljs-keyword, .hljs-selector-tag { color: var(--accent); }
+.hljs-string, .hljs-attr { color: var(--green); }
+.hljs-number, .hljs-literal { color: var(--yellow); }
+.hljs-built_in, .hljs-type { color: var(--teal); }
+.hljs-function, .hljs-title { color: var(--blue); }
+.hljs-variable { color: var(--text); }
+
+/* ── Utils ───────────────────────────────────────────────────── */
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.flex-1 { flex: 1; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.gap-1 { gap: 4px; }
+.gap-2 { gap: 8px; }
+.gap-3 { gap: 12px; }
+.truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.text-muted { color: var(--text-muted); }
+.text-sm { font-size: 12px; }
+.text-accent { color: var(--accent); }
